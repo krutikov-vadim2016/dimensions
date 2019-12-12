@@ -67,10 +67,15 @@
 <code>
 require_once($_SERVER["DOCUMENT_ROOT"]."/local/1c/1c_exchange_custom.php");
 </code>
+
 Создаем файл  /local/1c/1c_exchange_custom.php и копируем в него содержимое файла /bitrix/modules/sale/admin/1c_exchange.php.
-В файле /local/1c/1c_exchange_custom.php находим подключение компонента bitrix:catalog.import.1c и заменяем на компонент из своего простанства имен, например nikolaus:catalog.import.1c. Следовательно копируем компонент bitrix:catalog.import.1c в новое пространство например /local/components/nikolaus.
+
+В файле /local/1c/1c_exchange_custom.php находим подключение компонента bitrix:catalog.import.1c и заменяем на компонент из своего простанства имен, например nikolaus:catalog.import.1c. 
+Следовательно копируем компонент bitrix:catalog.import.1c в новое пространство, например /local/components/nikolaus.
 Открываем файл component.php нового компонента и заменяем вызов старого класса CIBlockCMLImport на новый CIBlockCMLImportCustom.
+
 Необходимо подключить новый класс в компоненте. Для этого добавляем 
+<code>
 use Bitrix\Main\Loader;
 
 Loader::registerAutoLoadClasses(
@@ -79,8 +84,13 @@ Loader::registerAutoLoadClasses(
 		'CIBlockCMLImportCustom' => '/local/1c/cml2_custom.php'
 	)
 );
+</code>
+
 сразу после строки 
+<code>
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
+</code>
+	
 Сохраняем файл.
 
 Обсен с 1с запускаем через новый скрипт /bitrix/admin/1c_exchange_custom.php.
