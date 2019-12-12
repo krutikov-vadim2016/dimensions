@@ -75,9 +75,9 @@ require_once($_SERVER["DOCUMENT_ROOT"]."/local/1c/1c_exchange_custom.php");
 Открываем файл component.php нового компонента и заменяем вызов старого класса CIBlockCMLImport на новый CIBlockCMLImportCustom.
 
 Необходимо подключить новый класс в компоненте. Для этого добавляем 
+
 <code>
 use Bitrix\Main\Loader;
-
 Loader::registerAutoLoadClasses(
 	null,
 	array(
