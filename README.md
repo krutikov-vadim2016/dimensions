@@ -65,9 +65,7 @@
 
 В папке /bitrix/admin создаем файл 1c_exchange_custom.php. Туда пишем
 <code>
-<?
-	require_once($_SERVER["DOCUMENT_ROOT"]."/local/1c/1c_exchange_custom.php");
-?>
+require_once($_SERVER["DOCUMENT_ROOT"]."/local/1c/1c_exchange_custom.php");
 </code>
 Создаем файл  /local/1c/1c_exchange_custom.php и копируем в него содержимое файла /bitrix/modules/sale/admin/1c_exchange.php.
 В файле /local/1c/1c_exchange_custom.php находим подключение компонента bitrix:catalog.import.1c и заменяем на компонент из своего простанства имен, например nikolaus:catalog.import.1c. Следовательно копируем компонент bitrix:catalog.import.1c в новое пространство например /local/components/nikolaus.
