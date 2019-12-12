@@ -93,5 +93,5 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 	
 Сохраняем файл.
 
-Обсен с 1с запускаем через новый скрипт /bitrix/admin/1c_exchange_custom.php.
+Обмен с 1с запускаем через новый скрипт /bitrix/admin/1c_exchange_custom.php.
 
