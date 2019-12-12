@@ -1,7 +1,7 @@
 # dimensions
 Выгружаем габариты из 1с в битрикс
 
-Для начала необходимо выгрузить габариты из 1с в xml. Аналогично тому как выгружается вес
+Для начала необходимо выгрузить габариты из 1с в xml. Аналогично тому как выгружается вес. Пример части файла offers.xml
 
 			<Предложение>
 				<Цены>
@@ -62,3 +62,26 @@
 				<Глубина>150</Глубина>
 				<Высота>260</Высота>
 			</Предложение>
+
+В папке /bitrix/admin создаем файл 1c_exchange_custom.php. Туда пишем
+<?
+	require_once($_SERVER["DOCUMENT_ROOT"]."/local/1c/1c_exchange_custom.php");
+?>
+Создаем файл  /local/1c/1c_exchange_custom.php и копируем в него содержимое файла /bitrix/modules/sale/admin/1c_exchange.php.
+В файле /local/1c/1c_exchange_custom.php находим подключение компонента bitrix:catalog.import.1c и заменяем на компонент из своего простанства имен, например nikolaus:catalog.import.1c. Следовательно копируем компонент bitrix:catalog.import.1c в новое пространство например /local/components/nikolaus.
+Открываем файл component.php нового компонента и заменяем вызов старого класса CIBlockCMLImport на новый CIBlockCMLImportCustom.
+Необходимо подключить новый класс в компоненте. Для этого добавляем 
+use Bitrix\Main\Loader;
+
+Loader::registerAutoLoadClasses(
+	null,
+	array(
+		'CIBlockCMLImportCustom' => '/local/1c/cml2_custom.php'
+	)
+);
+сразу после строки 
+if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
+Сохраняем файл.
+
+Обсен с 1с запускаем через новый скрипт /bitrix/admin/1c_exchange_custom.php.
+
